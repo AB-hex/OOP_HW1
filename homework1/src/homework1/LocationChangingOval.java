@@ -1,6 +1,6 @@
 package homework1;
 import java.awt.*;
-
+//OVERVIEW
 public class LocationChangingOval extends LocationChangingShape{
 	Dimension dimension;
 	public LocationChangingOval(Point location, Color color) {
