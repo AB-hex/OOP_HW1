@@ -2,6 +2,9 @@ package homework1;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Random;
+
 import javax.swing.*;
 
 /**
@@ -26,9 +29,9 @@ public class Animator extends JFrame implements ActionListener {
 	private JPanel mainPanel;
 
 	// shapes that have been added to this
-
 	// TODO: Add and initialize a container of shapes called shapes.
-
+	
+    private ArrayList<Shape> shapes = new ArrayList<Shape>();
 
 	/**
 	 * @modifies this
@@ -36,9 +39,9 @@ public class Animator extends JFrame implements ActionListener {
 	 * 			of all shapes in this 25 times per second while animation
 	 * 			checkbox is selected.
 	 */
-	public Animator() {
+	public Animator()  {
 		super("Animator");
-
+		
 		// create main panel and menubar
 		mainPanel = (JPanel)createMainPanel();
 		getContentPane().add(mainPanel);
@@ -49,17 +52,18 @@ public class Animator extends JFrame implements ActionListener {
 		// If the animation doesn't work on your computer, increase the first argument of the Timer constructor
 		// until you see the animation. Return the number to 40 before submitting the code.
         Timer timer = new Timer(40, new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                if (animationCheckItem.isSelected()) {
-                	// TODO: Add code for making one animation step for all
-                	// 		 shapes in this
-
-
-
-            		repaint();	// make sure that the shapes are redrawn
-                }
-            }
-        });
+	            public void actionPerformed(ActionEvent evt) {
+	                if (animationCheckItem.isSelected()) {
+	                	// TODO: Add code for making one animation step for all
+	                	// 		 shapes in this
+	                	
+	            		java.util.Iterator<Shape> gen = shapes.iterator();
+	            		gen.forEachRemaining((shape)->((LocationChangingShape)shape).step(new Rectangle(WINDOW_WIDTH, WINDOW_HEIGHT)));	
+	            			         	
+	            		repaint();	// make sure that the shapes are redrawn
+	                }
+	            }
+	        });
         timer.start();
 	}
 
@@ -127,12 +131,12 @@ public class Animator extends JFrame implements ActionListener {
 	 * 			directly, but the repaint method should be used instead in
 	 * 			order to schedule the component for redrawing.
 	 */
+	//TODO: Add code for drawing all shapes in this
 	public void paint(Graphics g) {
 		super.paint(g);
-
-		//TODO: Add code for drawing all shapes in this
-
-
+		java.util.Iterator<Shape> gen = shapes.iterator();
+		gen.forEachRemaining((shape)->shape.draw(getContentPane().getGraphics()));	
+			
 	}
 
 
@@ -162,14 +166,34 @@ public class Animator extends JFrame implements ActionListener {
       		 	 (source.equals(ovalItem)) ||
       		 	 (source.equals(numberedOvalItem)) ||
       		 	 (source.equals(sectorItem))) {
-
 			// TODO: Add code for creating the appropriate shape such that:
 			// 		 it is completely inside the window's bounds &&
 			//		 its location and size are randomly selected &&
 			//		 1/10*WINDOW_WIDTH <= shape.width < 3/10*WINDOW_WIDTH &&
 			//		 1/10*WINDOW_HEIGHT <= shape.height < 3/10*WINDOW_HEIGHT
-
-
+			Color color = new Color((int)(Math.random() * 0x1000000));
+			Random rand = new Random();
+			Point point = new Point(rand.nextInt(WINDOW_WIDTH),rand.nextInt(WINDOW_HEIGHT));
+			Dimension dimension = new Dimension(rand.nextInt((int)WINDOW_WIDTH/10,(int)WINDOW_WIDTH*3/10),
+					rand.nextInt((int)WINDOW_WIDTH/10,(int)WINDOW_WIDTH*3/10));
+			
+			LocationChangingShape shape = switch(source.getText()) {
+				case "Triangle"->
+					 new LocationChangingOval(point,color) ;
+				case "Oval"->
+					 new LocationChangingOval(point,color) 	;				
+				case "Numbered Oval"->
+					 new LocationChangingOval(point,color) ;
+				case "Sector"->
+					  new LocationChangingOval(point,color) ;				default -> new LocationChangingOval(point,color) ;
+			};
+			
+			try {
+				shape.setSize(dimension);
+			} catch (ImpossibleSizeException e1) {
+				
+			}
+			shapes.add(shape);
 			repaint();
 		}
 

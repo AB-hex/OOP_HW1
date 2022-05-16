@@ -97,19 +97,21 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
     
     protected boolean[] inLimit(Rectangle bound) {
     	boolean[] result = {true,true};
-       	Rectangle r = getBounds();
+       	Rectangle shape = getBounds();
+       	shape.setLocation(getLocation());
+       	
        	int leftBorder = 0,rightBorder = bound.width,
        			upperBorder = 0, lowerBorder = bound.height;
-    	if( r.contains(leftBorder,r.y) 
-    			|| r.contains(rightBorder,r.y)
-    			|| r.contains(leftBorder-velocityX,r.y)
-    			|| r.contains(rightBorder-velocityX,r.y)) {
+    	if( shape.contains(leftBorder,shape.y) 
+    			|| shape.contains(rightBorder,shape.y)
+    			|| shape.contains(leftBorder-velocityX,shape.y)
+    			|| shape.contains(rightBorder-velocityX,shape.y)) {
     		result[0] = false;	
     	} 
-    	if( r.contains(r.x,upperBorder) 
-    			|| r.contains(r.x,lowerBorder)
-    			|| r.contains(r.x,upperBorder-velocityY)
-    			|| r.contains(r.x,lowerBorder-velocityY)) {
+    	if( shape.contains(shape.x,upperBorder) 
+    			|| shape.contains(shape.x,lowerBorder)
+    			|| shape.contains(shape.x,upperBorder-velocityY)
+    			|| shape.contains(shape.x,lowerBorder-velocityY)) {
     		result[1] = false;	}
     	return result;
     }
