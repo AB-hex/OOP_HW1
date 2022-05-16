@@ -2,33 +2,23 @@ package homework1;
 import java.awt.*;
 //OVERVIEW
 public class LocationChangingOval extends LocationChangingShape{
-	Dimension dimension;
+	private Dimension size = new Dimension(0,0);
 	public LocationChangingOval(Point location, Color color) {
 		super(location, color);
 	}
 
-	public void setSize(Dimension dimension) throws ImpossibleSizeException {
-		try{
-			if(dimension.height*dimension.width >= 600*400) {
-			throw new ImpossibleSizeException();
-			}
-			else {this.dimension = (Dimension)dimension.clone();}
-			
-		}
-		catch(ImpossibleSizeException e) {
-			this.dimension = (Dimension)e.alternativeSize.clone();
-		}
-		
+	public void setSize(Dimension dimension) {
+			this.size.setSize(dimension);		
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(dimension);
+		return new Rectangle(getLocation(),size);
 	}
 
 	public void draw(Graphics g) {
 		g.setColor(getColor());
 		g.fillOval(getLocation().x, getLocation().y ,
-				dimension.width , dimension.height );	
+				size.width , size.height );	
 	}
 	
 	

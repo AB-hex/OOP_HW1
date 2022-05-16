@@ -173,19 +173,19 @@ public class Animator extends JFrame implements ActionListener {
 			//		 1/10*WINDOW_HEIGHT <= shape.height < 3/10*WINDOW_HEIGHT
 			Color color = new Color((int)(Math.random() * 0x1000000));
 			Random rand = new Random();
-			Point point = new Point(rand.nextInt(WINDOW_WIDTH),rand.nextInt(WINDOW_HEIGHT));
 			Dimension dimension = new Dimension(rand.nextInt((int)WINDOW_WIDTH/10,(int)WINDOW_WIDTH*3/10),
 					rand.nextInt((int)WINDOW_WIDTH/10,(int)WINDOW_WIDTH*3/10));
+			Point point = new Point(rand.nextInt(WINDOW_WIDTH-dimension.width),rand.nextInt(WINDOW_HEIGHT-dimension.height));
 			
 			LocationChangingShape shape = switch(source.getText()) {
 				case "Triangle"->
-					 new LocationChangingOval(point,color) ;
+					 new LocationAndColorChangingTriangle(point,color) ;
 				case "Oval"->
 					 new LocationChangingOval(point,color) 	;				
 				case "Numbered Oval"->
-					 new LocationChangingOval(point,color) ;
+					 new LocationChangingNumberedOval(point,color) ;
 				case "Sector"->
-					  new LocationChangingOval(point,color) ;				default -> new LocationChangingOval(point,color) ;
+					  new LocationChangingOval(point,color) ;				default -> new LocationChangingNumberedOval(point,color) ;
 			};
 			
 			try {
