@@ -57,8 +57,8 @@ public class Animator extends JFrame implements ActionListener {
 	                	// TODO: Add code for making one animation step for all
 	                	// 		 shapes in this
 	                	
-	            		java.util.Iterator<Shape> gen = shapes.iterator();
-	            		gen.forEachRemaining((shape)->((LocationChangingShape)shape).step(new Rectangle(WINDOW_WIDTH, WINDOW_HEIGHT)));	
+	            		java.util.Iterator<Shape> iteratorShapes = shapes.iterator();
+	            		iteratorShapes.forEachRemaining((shape)->((LocationChangingShape)shape).step(new Rectangle(WINDOW_WIDTH, WINDOW_HEIGHT)));	
 	            			         	
 	            		repaint();	// make sure that the shapes are redrawn
 	                }
@@ -134,8 +134,8 @@ public class Animator extends JFrame implements ActionListener {
 	//TODO: Add code for drawing all shapes in this
 	public void paint(Graphics g) {
 		super.paint(g);
-		java.util.Iterator<Shape> gen = shapes.iterator();
-		gen.forEachRemaining((shape)->shape.draw(getContentPane().getGraphics()));	
+		java.util.Iterator<Shape> iteratorShapes = shapes.iterator();
+		iteratorShapes.forEachRemaining((shape)->shape.draw(getContentPane().getGraphics()));	
 			
 	}
 
@@ -154,6 +154,7 @@ public class Animator extends JFrame implements ActionListener {
 			repaint();
 
 			//TODO  Add code for number of LocationChangingNumerOval = 0
+			LocationChangingNumberedOval.restartCounter();
 		}
 
 		// File->Exit: close application
