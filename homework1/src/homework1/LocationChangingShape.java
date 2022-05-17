@@ -27,11 +27,11 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
 	 */
 	public LocationChangingShape(Point location, Color color) {
 		super(location,color);
-		int upperBound = 6, lowerBound = -6; 
+		int upperBoundExclusive = 6, lowerBoundInclusive = -5; 
 		Random rand = new Random();
 		do {
-		velocityX = rand.nextInt(upperBound-lowerBound)+lowerBound;
-    	velocityY = rand.nextInt(upperBound-lowerBound)+lowerBound;
+		velocityX = rand.nextInt(lowerBoundInclusive,upperBoundExclusive);
+    	velocityY = rand.nextInt(lowerBoundInclusive,upperBoundExclusive);
 		}while( velocityX==0 || velocityY==0 );
     
     }
