@@ -18,13 +18,10 @@ public abstract class Shape implements Cloneable {
 	//of the bounding rectangle of shape
 		
 	//The rep invariant is:
-	//c.location != null && c.color !=null
+	//c.location != null && c.color !=null &&
+	//c.location is Point && c.color is Color
+	
 		
-	
-	// TODO: Write Abstraction Function
-	
-	// TODO: Write Representation Invariant
-	
 	
 	/**
 	 * @effects Initializes this with a a given location and color.
@@ -32,6 +29,7 @@ public abstract class Shape implements Cloneable {
     public Shape(Point location, Color color) {
     	setLocation(location);
     	setColor(color);
+    	checkRep();
     }
 
 
@@ -50,6 +48,7 @@ public abstract class Shape implements Cloneable {
      */
     public void setLocation(Point location) {
     	this.location = (Point)location.clone();
+    	checkRep();
     }
 
 
@@ -95,6 +94,7 @@ public abstract class Shape implements Cloneable {
      */
     public void setColor(Color color) {
     	this.color = color;
+    	checkRep();
     }
 
 
@@ -117,6 +117,22 @@ public abstract class Shape implements Cloneable {
     	}
     	newShape.location = (Point)location.clone(); //deep clone mutable class Point
     	return newShape;
+    }
+    
+    
+    
+	/*
+	 * @EFFECTS: Returns true if the rep invariant holds for this: otherwise returns
+	 * false
+	 */
+    public boolean checkRep() {
+    	if(location == null || color == null) {
+    		return false;
+    	}
+    	else if(!(location instanceof Point)||!(color instanceof Color)) {
+    		return false;
+    	}
+    	else return true;
     }
 
 }
