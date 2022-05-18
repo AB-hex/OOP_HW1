@@ -122,7 +122,7 @@ public abstract class Shape implements Cloneable {
     
     
 	/*
-	 * @EFFECTS: Returns true if the rep invariant holds for this: otherwise returns
+	 * @effects: Returns true if the rep invariant holds for this: otherwise returns
 	 * false
 	 */
     public boolean checkRep() {
