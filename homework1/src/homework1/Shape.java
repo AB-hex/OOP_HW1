@@ -12,7 +12,14 @@ public abstract class Shape implements Cloneable {
 
 	private Point location;
 	private Color color;
-
+	//AF(c) = An Abstract Shape where 
+	// c.color = color of the shape
+	// c.location = location of the top left corner 
+	//of the bounding rectangle of shape
+		
+	//The rep invariant is:
+	//c.location != null && c.color !=null
+		
 	
 	// TODO: Write Abstraction Function
 	
