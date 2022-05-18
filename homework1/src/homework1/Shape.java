@@ -101,9 +101,16 @@ public abstract class Shape implements Cloneable {
     /**
      * @effects Creates and returns a copy of this.
      */
-//    public Object clone() {    	
-//    	return new Shape((Point)location.clone() , new Color(color.getRGB()));
-//    }
+    public Object clone() {    	
+    	Shape newShape = null;
+    	try {
+    		newShape = (Shape)super.clone();
+    	} catch(CloneNotSupportedException e) {
+    		assert false: "Shape.Clone() Exception CloneNotSupportedException";
+    	}
+    	newShape.location = (Point)location.clone(); //deep clone mutable class Point
+    	return newShape;
+    }
 
 }
 
