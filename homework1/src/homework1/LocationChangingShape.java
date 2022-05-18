@@ -12,7 +12,6 @@ import java.util.Random;
 
 public abstract class LocationChangingShape extends Shape implements Animatable {
 	private int velocityX, velocityY;
-	// TODO: Write Abstraction Function
 
 	
 	/*
@@ -27,8 +26,8 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
 	 * for i in {c.velocityX,c.velocityY}: 
 	 * -5 <= i <= 5 && i != 0
 	 */
-	// TODO: Write Representation Invariant
 
+	
 	/**
 	 * @effects Initializes this with a a given location and color. Each of the
 	 *          horizontal and vertical velocities of the new object is set to a
@@ -42,7 +41,7 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
 			velocityX = rand.nextInt(lowerBoundInclusive, upperBoundExclusive);
 			velocityY = rand.nextInt(lowerBoundInclusive, upperBoundExclusive);
 		} while (velocityX == 0 || velocityY == 0);
-		checkRep();
+		assert checkRep();
 	}
 
 	/**
@@ -68,7 +67,7 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
 	public void setVelocity(int velocityX, int velocityY) {
 		this.velocityX = velocityX;
 		this.velocityY = velocityY;
-		checkRep();
+		assert checkRep();
 	}
 
 	/**
